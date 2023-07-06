@@ -1,0 +1,35 @@
+form {
+    display: grid;
+    justify-content: center;
+    gap: 20px;
+}
+
+input {
+    margin-left: 50px;
+    width: 250px;
+    height: 50px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+textarea {
+    width: 200px;
+    height: 50px;
+    margin-left: 110px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+button {
+    background: #ff3a3a;
+    border-radius: 6px;
+
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #ffffff;
+}
