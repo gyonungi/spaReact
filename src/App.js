@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import Card from "./components/card/Card";
-
+import "react-bootstrap";
 import "./app.scss";
 import Burger from "./components/Burger/Burger";
 import ReactPaginate from "react-paginate";
@@ -9,23 +9,23 @@ import Pagination from "./pagin/Pagination";
 import { Route, Routes } from "react-router";
 import About from "./pages/About";
 import Main from "./pages/Main";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers, setUsers } from "./components/store/userSlice";
 function App() {
   const [loading, setLoading] = useState(false);
-  const [text, setText] = useState([]);
-  const [users, setUsers] = useState([]);
+  const users = useSelector((state) => state.user.items);
+
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
 
-  const addText = (obj) =>{
-    axios.post(`https://64a56be700c3559aa9bfad48.mockapi.io/users`,obj)
-    setUsers((prev)=>[...prev,obj])
-  }
+  const addText = (obj) => {
+    axios.post(`https://64a56be700c3559aa9bfad48.mockapi.io/users`, obj);
+    dispatch(setUsers((prev) => [...prev, obj]));
+  };
   useEffect(() => {
     async function fetchData() {
-      const usersResponce = await axios.get(
-        `https://64a56be700c3559aa9bfad48.mockapi.io/users?page=${currentPage}&limit=2`
-      );
-      setUsers(usersResponce.data);
+      dispatch(fetchUsers({ currentPage }));
     }
     setLoading(true);
     setTimeout(() => {
@@ -54,7 +54,6 @@ function App() {
                   users={users}
                   currentPage={currentPage}
                   setCurrentPage={setCurrentPage}
-                  setUsers={setUsers}
                   addText={addText}
                 />
               }
